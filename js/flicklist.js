@@ -8,13 +8,13 @@ var model = {
 
 var api = {
   root: "https://api.themoviedb.org/3",
-  token: "TODO", // TODO 0 add your api key
+  token: "42d1e0f466a7f6d98d603523c838ddb0", // TODO 0 add your api key
   /**
    * Given a movie object, returns the url to its poster image
    */
   posterUrl: function(movie) {
     var baseImageUrl = "http://image.tmdb.org/t/p/w300/";
-    return baseImageUrl + movie.poster_path; 
+    return baseImageUrl + movie.poster_path;
   }
 }
 
@@ -28,9 +28,9 @@ var api = {
 
 // TODO 1
 // this function should accept a second argument, `keywords`
-function discoverMovies(callback) {
+function discoverMovies(callback, keywords) {
 
-  // TODO 2 
+  // TODO 2
   // ask the API for movies related to the keywords that were passed in above
   // HINT: add another key/value pair to the `data` argument below
 
@@ -48,7 +48,7 @@ function discoverMovies(callback) {
 
 
 /**
- * Makes an AJAX request to the /search/keywords endpoint of the API, using the 
+ * Makes an AJAX request to the /search/keywords endpoint of the API, using the
  * query string that was passed in
  *
  * if successful, invokes the supplied callback function, passing in
@@ -70,7 +70,7 @@ function searchMovies(query, callback) {
 
 
   // TODO 4b
-  // create a new variable called keywordsString by converting 
+  // create a new variable called keywordsString by converting
   // the array of ids to a comma-separated string, e.g.
   //      "192305,210090,210092,210093"
   // HINT: use the Array join function
@@ -84,9 +84,9 @@ function searchMovies(query, callback) {
 
 
   // TODO 4d
-  // when the response comes back, call discoverMovies, 
+  // when the response comes back, call discoverMovies,
   // passing along 2 arguments:
-  // 1) the callback 
+  // 1) the callback
   // 2) the string of keywords
 
 
@@ -115,7 +115,7 @@ function render() {
   // render watchlist items
   model.watchlistItems.forEach(function(movie) {
     var title = $("<h6></h6>").text(movie.original_title);
-      
+
     // movie poster
     var poster = $("<img></img>")
       .attr("src", api.posterUrl(movie))
@@ -135,7 +135,7 @@ function render() {
     var panelHeading = $("<div></div>")
       .attr("class", "panel-heading")
       .append(title);
-    
+
     // panel body contains the poster and button
     var panelBody = $("<div></div>")
       .attr("class", "panel-body")
@@ -168,7 +168,7 @@ function render() {
     var itemView = $("<li></li>")
       .attr("class", "list-group-item")
       .append( [title, overview, button] );
-      
+
     // append the itemView to the list
     $("#section-browse ul").append(itemView);
   });
