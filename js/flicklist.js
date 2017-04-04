@@ -38,8 +38,10 @@ function discoverMovies(callback, keywords) {
     url: api.root + "/discover/movie",
     data: {
       api_key: api.token,
+      with_keywords: keywords
     },
     success: function(response) {
+      console.log(response);
       model.browseItems = response.results;
       callback(response);
     }
@@ -91,13 +93,21 @@ function searchMovies(query, callback) {
 
 
   $.ajax({
-    url: api.root + "/search/movie",
+    url: api.root + "/search/keyword",
     data: {
       api_key: api.token,
       query: query
     },
     success: function(response) {
       console.log(response);
+
+      var keywordIds = response.results.map(function(obj){
+          return obj.id;
+      });
+      var keywordsString = keywordIds.join("|");
+      console.log(keywordsString);
+
+      discoverMovies(callback, keywordsString);
     }
   });
 }
